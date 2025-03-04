@@ -129,3 +129,141 @@ source myenv/bin/activate
 Django's modular architecture and built-in tools make web development efficient and scalable.
 
 See you tomorrow! Good day!
+
+##### Dt. 04 Mar, 2025.
+
+Yesterday, I forgot to mention - I had practiced creating function based views. My progress can be tracked through [Hello_Django](/Hello_Django/) directory.
+
+Today we will cover templates in Django. Also, I read this easy to understand article on MVT -> [Django MVT - GeeksForGeeks](https://www.geeksforgeeks.org/django-project-mvt-structure/)
+
+I have covered till video 17 from the [Geeky Shows playlist](https://www.youtube.com/watch?v=jX90ErC5NR4&list=PLbGui_ZYuhigUfO47FLx4ocfmo1071hlc). The summary is as follows -
+
+### Template
+
+- Django templates are used to define the structure and layout of HTML pages dynamically.
+- It follows the **MVT (Model-View-Template)** pattern.
+- Templates allow rendering dynamic data from views using Django Template Language (DTL).
+- Templates are stored in the `templates/` directory within an app or at the project level.
+- Template files typically have a `.html` extension.
+
+#### Creating and Using Templates
+
+1. Create a `templates` directory inside your Django app.
+2. Inside `templates/`, create an HTML file (e.g., `home.html`).
+3. Load and render the template from a view using `render()`.
+
+   ```python
+   from django.shortcuts import render
+
+   def home(request):
+       return render(request, 'home.html')
+   ```
+
+4. Configure `TEMPLATES` in `settings.py` to ensure Django can find template directories.
+
+#### Render Dynamic Template
+
+- Dynamic templates allow passing data from views to templates.
+- Use the `context` parameter in `render()` to send data.
+- Example:
+  ```python
+  def home(request):
+      context = {'name': 'Django', 'version': 5.0}
+      return render(request, 'home.html', context)
+  ```
+- Access variables inside the template:
+  ```html
+  <h1>Welcome to {{ name }} version {{ version }}</h1>
+  ```
+
+#### Django Template Language (DTL)
+
+- DTL is a built-in templating engine used to render data dynamically in Django templates.
+- Supports variables, filters, tags, and template inheritance.
+- **Syntax:**
+  - Variables: `{{ variable_name }}`
+  - Tags: `{% tag_name %}` (e.g., `{% for item in list %}`)
+  - Filters: `{{ variable|filter_name }}`
+
+##### Template Inheritance
+
+- Allows reusing common HTML structures using `{% block %}` and `{% extends %}`.
+- `base.html` (Parent Template):
+  ```html
+  <html>
+    <head>
+      <title>{% block title %}Default Title{% endblock %}</title>
+    </head>
+    <body>
+      {% block content %}{% endblock %}
+    </body>
+  </html>
+  ```
+- `home.html` (Child Template):
+  ```html
+  {% extends 'base.html' %} {% block title %}Home Page{% endblock %} {% block
+  content %}
+  <h1>Welcome to Django</h1>
+  {% endblock %}
+  ```
+
+##### Variables
+
+- Used to pass dynamic content from views to templates.
+- Example:
+  ```html
+  <p>Hello, {{ user.name }}</p>
+  ```
+
+##### Filters
+
+- Modify variables before displaying them.
+- Applied using the `|` (pipe) symbol.
+- Common Filters:
+  - `{{ text|lower }}` → Converts text to lowercase.
+  - `{{ text|upper }}` → Converts text to uppercase.
+  - `{{ list|length }}` → Returns the length of a list.
+  - `{{ date|date:"Y-m-d" }}` → Formats a date.
+
+#### Static Files (CSS, JS, Images)
+
+- Django handles static files like CSS, JavaScript, and images using the `static` directory.
+- Configure `STATICFILES_DIRS` in `settings.py`:
+  ```python
+  STATIC_URL = '/static/'
+  STATICFILES_DIRS = [BASE_DIR / 'static']
+  ```
+- Create a `static/` folder inside the app and organize files:
+  ```
+  static/
+      css/
+          styles.css
+      js/
+          scripts.js
+      images/
+          logo.png
+  ```
+- Load static files in templates:
+  ```html
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  <script src="{% static 'js/scripts.js' %}"></script>
+  <img src="{% static 'images/logo.png' %}" alt="Logo" />
+  ```
+- Run `python manage.py collectstatic` to gather all static files in the `STATIC_ROOT` directory for production.
+
+Alongside, I practiced inside our [Hello_Django directory](/Hello_Django/).
+
+- I practied creating dynamic templates inside [Profile/views.py](/Hello_Django/Profile/views.py) and [templates folder.](/Hello_Django/Profile/templates/Profile/)
+- Practiced DTL inside [Profile/likes.html](/Hello_Django/Profile/templates/Profile/likes.html)
+- Used Django Static files from templates. [Static files](/Hello_Django/Profile/static/Profile/) and [details.html](/Hello_Django/Profile/templates/Profile/details.html)
+- Very interesting task - Manipulate js on click of a button and changes static images inside Django template.
+  ![Before](/Snapshots/Output_details.html_1.png)
+  ![After](/Snapshots/Output_details.html_2.png)
+- Even the css properties of both picture are changed using set attributes method of js.
+
+Later, we all trainees had coding round. I have solved both the questions -> [Check it out](/Coding_round.py)
+
+See you tomorrow! Bye!
+
+## How to integrate already existing db in our models
