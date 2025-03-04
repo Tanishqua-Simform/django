@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <body>
+    <h1>Posts liked by -</h1>
+    <ul>
+      <li>
+        Post 1 -
+        <ul>
+          {% for user in p1 %}
+          <li>{{user | default:'None'}}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <hr />
+      <li>
+        Post 2 -
+        <ul>
+          {% for user in p2 %}
+          <li>{{user | default:'None'}}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <hr />
+      <li>
+        Post 3 -
+        <ul>
+          {% for user in p3 %}
+          <li>{{user | default:'None'}}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <hr />
+      <li>
+        Post 4 -
+        <ul>
+          {% for user in p4 %}
+          <li>{{user | default:'None'}}</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <hr />
+      <li>
+        Post 5 -
+        <ul>
+          {% for user in p5 %}
+          <li>{{user | default:'None'}}</li>
+          <!-- Works when list is not empty but contains an empty element-->
+          <li>{{user}}</li>
+          {% empty %}
+          <!-- Always works for empty list-->
+          <li>No one liked yet!</li>
+          {% endfor %}
+        </ul>
+      </li>
+      <hr />
+    </ul>
+
+    <script src="" async defer></script>
+  </body>
+</html>
