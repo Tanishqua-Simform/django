@@ -266,4 +266,184 @@ Later, we all trainees had coding round. I have solved both the questions -> [Ch
 
 See you tomorrow! Bye!
 
-## How to integrate already existing db in our models
+##### Dt. 05 Mar, 2025.
+
+Today we'll complete rest of templates. So let's get started -
+
+I have completed till 26th video from [Geeky Shows Playlist](https://www.youtube.com/watch?v=ptE5Y2N9i9Q&list=PLbGui_ZYuhigUfO47FLx4ocfmo1071hlc). Its summary is as follows -
+
+#### Template Inheritance
+
+- Template inheritance allows reusing a base template across multiple pages.
+- The base template defines a structure, and child templates extend it.
+- Uses `{% block %}` and `{% extends %}`.
+
+##### Base Template (`base.html`)
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}Default Title{% endblock %}</title>
+  </head>
+  <body>
+    <header>{% block header %}{% endblock %}</header>
+    <main>{% block content %}{% endblock %}</main>
+    <footer>{% block footer %}Default Footer{% endblock %}</footer>
+  </body>
+</html>
+```
+
+##### Child Template (`home.html`)
+
+```html
+{% extends 'base.html' %} {% block title %}Home Page{% endblock %} {% block
+content %}
+<h1>Welcome to Django</h1>
+{% endblock %}
+```
+
+- If multiple `{% block %}` tags have the same name in a template, Django throws a `TemplateSyntaxError`.
+- Each block name must be unique within the same template file.
+
+#### Template Inheritance with Static Files
+
+- Static files (CSS, JS, Images) should be included in the base template and inherited by child templates.
+- Load static files in the base template:
+
+```html
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+<script src="{% static 'js/script.js' %}"></script>
+```
+
+- Child templates inherit these static files without re-declaring them.
+
+#### Add Bootstrap in Django
+
+- Django does not include Bootstrap by default, but you can integrate it manually or via a package.
+- Install Django Bootstrap 5:
+
+```sh
+pip install django-bootstrap5
+```
+
+- Add it to `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    'django_bootstrap5',
+]
+```
+
+- Load Bootstrap in templates:
+
+```html
+{% load bootstrap5 %} {% bootstrap_css %} {% bootstrap_javascript %}
+```
+
+- Official Docs: [Django Bootstrap 5](https://django-bootstrap5.readthedocs.io/en/latest/quickstart.html)
+
+#### Add Tailwind in Django
+
+- Tailwind can be integrated using the `django-tailwind` package.
+- Install Tailwind:
+
+```sh
+pip install django-tailwind
+```
+
+- Add it to `INSTALLED_APPS`:
+
+```python
+INSTALLED_APPS = [
+    'tailwind',
+    'theme',
+]
+```
+
+- Create a Tailwind theme:
+
+```sh
+python manage.py tailwind init theme
+```
+
+- Run the Tailwind build process:
+
+```sh
+python manage.py tailwind start
+```
+
+- Official Docs: [Django Tailwind](https://django-tailwind.readthedocs.io/en/latest/installation.html)
+
+#### TailwindCSS CLI
+
+- TailwindCSS CLI is used for direct integration without Django-tailwind.
+- Install Tailwind CLI:
+
+```sh
+npm install -g tailwindcss
+```
+
+- Initialize Tailwind configuration:
+
+```sh
+tailwindcss init
+```
+
+- Run Tailwind in watch mode:
+
+```sh
+tailwindcss -i ./input.css -o ./output.css --watch
+```
+
+#### Hyperlink Using `url` Tag
+
+- Django templates use `{% url %}` to create dynamic hyperlinks.
+- Example:
+
+```html
+<a href="{% url 'home' %}">Home</a>
+```
+
+- `home` is the name of a view defined in `urls.py`.
+- Passing parameters:
+
+```html
+<a href="{% url 'profile' user.id %}">Profile</a>
+```
+
+#### Template Inside Template (`include` Tag)
+
+- `{% include %}` is used to insert one template inside another.
+- Example:
+
+```html
+{% include 'navbar.html' %}
+```
+
+- Useful for including headers, footers, and sidebars.
+
+#### Dynamic URL
+
+- Dynamic URLs allow passing parameters to views and generating URLs dynamically.
+- Define a URL pattern:
+
+```python
+path('post/<int:id>/', views.post_detail, name='post_detail')
+```
+
+- Create a dynamic link in a template:
+
+```html
+<a href="{% url 'post_detail' id=post.id %}">View Post</a>
+```
+
+Along with this, I solved 2 SQL queries and few DSA questions!
+
+Also, we had meeting to discuss about SPL(cricket) and team distribution. So technically, i was not able to complete my today's target but no worries we'll finish it tomorrow!
+
+See you tomorrow! Bye!
+
+crispy form
+clean method
