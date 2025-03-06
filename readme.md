@@ -445,5 +445,183 @@ Also, we had meeting to discuss about SPL(cricket) and team distribution. So tec
 
 See you tomorrow! Bye!
 
-crispy form
-clean method
+##### Dt. 06 Mar, 2025.
+
+Today we will see models and admin panel in Django.
+
+I have completed till 31st video from [Geeky Shows Playlist](https://www.youtube.com/watch?v=ptE5Y2N9i9Q&list=PLbGui_ZYuhigUfO47FLx4ocfmo1071hlc). Its summary is as follows -
+
+### ORM (Object-Relational Mapping)
+
+- ORM allows interaction with the database using Python code instead of SQL queries.
+- Django provides a high-level ORM that abstracts database interactions.
+- Works with different databases like PostgreSQL, MySQL, SQLite, and Oracle.
+- Uses Python classes (models) to define database tables and relationships.
+
+#### Models
+
+- A model in Django is a Python class that represents a table in the database.
+- Defined in `models.py` inside a Django app.
+- Each class variable represents a field in the table.
+
+```python
+from django.db import models
+
+class Author(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    age = models.IntegerField(null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+```
+
+#### Common Model Fields:
+
+- `CharField(max_length=...)` – Stores short text values.
+- `IntegerField()` – Stores integer values.
+- `BooleanField()` – Stores True/False values.
+- `DateTimeField(auto_now_add=True)` – Stores date and time when an object is created.
+- `ForeignKey()` – Defines a many-to-one relationship.
+- `ManyToManyField()` – Defines a many-to-many relationship.
+
+#### Migrations
+
+- Migrations apply changes to the database schema based on model updates.
+- Django generates migrations automatically when models are created or updated.
+
+#### Commands:
+
+- `python manage.py makemigrations` – Creates migration files for model changes.
+- `python manage.py migrate` – Applies migration files to the database.
+- `python manage.py showmigrations` – Lists available migrations.
+- `python manage.py sqlmigrate <app_name> <migration_number>` – Shows raw SQL of a migration.
+
+#### Creating a Database
+
+- By default, Django uses SQLite, but other databases can be configured.
+- Database settings are defined in `settings.py`:
+
+```python
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydatabase',
+        'USER': 'myuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+```
+
+- After defining models, run:
+
+```sh
+python manage.py makemigrations
+python manage.py migrate
+```
+
+#### Retrieving Data
+
+- Django ORM provides methods to fetch data from the database.
+
+1. Fetch All Records:
+
+```python
+authors = Author.objects.all()
+```
+
+2. Filtering Data:
+
+```python
+adults = Author.objects.filter(age__gte=18)
+```
+
+3. Getting a Single Record:
+
+```python
+author = Author.objects.get(id=1)
+```
+
+4. Ordering Data:
+
+```python
+sorted_authors = Author.objects.order_by('-age')
+```
+
+5. Limiting Query Results:
+
+```python
+first_five = Author.objects.all()[:5]
+```
+
+6. Counting Records:
+
+```python
+count = Author.objects.count()
+```
+
+7. Checking Existence:
+
+```python
+exists = Author.objects.filter(name='John Doe').exists()
+```
+
+8. Related Objects:
+
+- If an `Author` has a ForeignKey to `Book`, access related books using:
+
+```python
+author = Author.objects.get(id=1)
+books = author.book_set.all()
+```
+
+### Admin Panel
+
+- Django provides a built-in admin interface for managing database records.
+- Access the admin panel by running the server and visiting `/admin/`.
+- Requires superuser creation:
+
+```sh
+python manage.py createsuperuser
+```
+
+- Enter a username, email, and password when prompted.
+- Start the server and log in with the created credentials.
+
+#### Register Model in Admin
+
+- To make a model accessible in the admin panel, register it in `admin.py`.
+
+```python
+from django.contrib import admin
+from .models import Author
+
+admin.site.register(Author)
+```
+
+#### Display Database Data in Admin
+
+- The admin panel allows viewing, adding, editing, and deleting records.
+- Customize the admin interface by using `ModelAdmin`.
+
+```python
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'age')
+    search_fields = ('name', 'email')
+    list_filter = ('age',)
+
+admin.site.register(Author, AuthorAdmin)
+```
+
+- `list_display`: Specifies columns to show in the list view.
+- `search_fields`: Enables search functionality.
+- `list_filter`: Adds filtering options in the admin panel.
+
+Later we had an extensive 4-hr long session on Django by our senior, in that we covered MVT architecture. Extend and Include in templates. Jinja template. And basic to-do list project for data retrieval and creation from admin panel.
+
+I have also started implementing [ToDo](/ToDo/) project myself. It is using sqlite3 as db. I have also implemented create and read operations. As well as filtering pending tasks.
+
+- Have a look
+  ![Todo - Admin](/Snapshots/Todo_admin_create.png)
