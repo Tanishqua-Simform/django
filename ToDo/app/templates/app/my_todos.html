@@ -1,0 +1,39 @@
+{% extends 'app/base.html' %} {% block content %}
+
+<h1 class="d-flex justify-content-center align-items-center mt-5">
+  Welcome Back, Tanishqua
+</h1>
+<h3 class="d-flex justify-content-center align-items-center mt-5 mb-5">
+  {% block title%} My Todos {% endblock title %}
+</h3>
+<ul>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Task No.</th>
+        <th scope="col">Title</th>
+        <th scope="col">Status</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in todo_list %}
+      <tr>
+        <th scope="row">{{task.id}}</th>
+        <td>{{task.title}}</td>
+        <td>{{task.status}}</td>
+        <td>{{task.priority}}</td>
+        <td>{{task.due_date}}</td>
+        <td>
+          <a class="btn btn-info" href="{% url 'details' task.id %}">
+            Details
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</ul>
+{% endblock content %}

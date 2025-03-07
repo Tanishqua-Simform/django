@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %} {% block content %}
+<div class="d-flex justify-content-center align-items-center mt-5">
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">{{task.title}}</h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">
+        {{task.assigned_by}}
+      </h6>
+      <p class="card-text">{{task.description}}</p>
+      <a href="{% url 'my_todos' %}" class="card-link">My Todos</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
