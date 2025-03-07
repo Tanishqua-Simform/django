@@ -625,3 +625,178 @@ I have also started implementing [ToDo](/ToDo/) project myself. It is using sqli
 
 - Have a look
   ![Todo - Admin](/Snapshots/Todo_admin_create.png)
+
+See you tomorrow!
+
+##### Dt. 07 Mar, 2025.
+
+Hello There!
+Let's get into Form validation and handling today. Later we'll continue our todo project.
+
+I have watched till 34th video.
+
+### Django Forms
+
+- Django provides a powerful `forms` module to handle form creation, validation, and processing.
+- Forms can be created manually or using ModelForms.
+- Django forms provide security against CSRF attacks.
+
+#### Creating a Form
+
+```python
+from django import forms
+
+class ContactForm(forms.Form):
+    name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    message = forms.CharField(widget=forms.Textarea)
+```
+
+- `CharField()`: Creates a text input field.
+- `EmailField()`: Ensures valid email format.
+- `widget=forms.Textarea`: Renders a multi-line input.
+
+#### Handling Form Submission in Views
+
+```python
+from django.shortcuts import render
+from .forms import ContactForm
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            # Process data (e.g., save to DB, send email, etc.)
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})
+```
+
+#### Rendering the Form in a Template
+
+```html
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>
+```
+
+### Django Form API
+
+- Provides methods to validate and process form data.
+
+#### Important Methods
+
+- `is_valid()`: Checks if form data is valid.
+- `cleaned_data`: Retrieves validated data from form fields.
+- `save()`: Used in ModelForms to save data.
+
+### Custom Validation
+
+```python
+class CustomForm(forms.Form):
+    age = forms.IntegerField()
+
+    def clean_age(self):
+        age = self.cleaned_data['age']
+        if age < 18:
+            raise forms.ValidationError("Must be at least 18 years old.")
+        return age
+```
+
+### ModelForm
+
+- Automatically generates form fields from a Django model.
+- Reduces redundancy by linking the form directly to a model.
+
+```python
+from django.forms import ModelForm
+from .models import Person
+
+class PersonForm(ModelForm):
+    class Meta:
+        model = Person
+        fields = ['name', 'email', 'age']
+```
+
+#### Using ModelForm in a View
+
+```python
+def person_view(request):
+    if request.method == 'POST':
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            form.save()
+    else:
+        form = PersonForm()
+    return render(request, 'person.html', {'form': form})
+```
+
+#### Rendering ModelForm in a Template
+
+```html
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Save</button>
+</form>
+```
+
+#### Rendering Form Fields Manually
+
+- Instead of using `{{ form.as_p }}`, fields can be rendered individually for better customization.
+
+```html
+<form method="post">
+  {% csrf_token %}
+  <label for="id_name">Name:</label>
+  {{ form.name }}
+  <label for="id_email">Email:</label>
+  {{ form.email }}
+  <label for="id_message">Message:</label>
+  {{ form.message }}
+  <button type="submit">Submit</button>
+</form>
+```
+
+#### Rendering Form Fields Using a Loop
+
+- Useful when dealing with many form fields dynamically.
+
+```html
+<form method="post">
+  {% csrf_token %} {% for field in form %}
+  <div>
+    <label>{{ field.label_tag }}</label>
+    {{ field }} {% if field.errors %}
+    <small style="color: red;">{{ field.errors }}</small>
+    {% endif %}
+  </div>
+  {% endfor %}
+  <button type="submit">Submit</button>
+</form>
+```
+
+#### Benefits of Loop Rendering
+
+- Dynamically generates form fields.
+- Provides a structured way to handle errors.
+- Enhances flexibility for UI styling.
+
+#### Jinja Vs. DTL
+
+| Feature                | Jinja2                                        | Django Template Language (DTL)                  |
+| ---------------------- | --------------------------------------------- | ----------------------------------------------- |
+| **Syntax**             | Python-like, flexible                         | More restrictive, Django-specific               |
+| **Performance**        | Faster, optimized for rendering               | Slower, but sufficient for most cases           |
+| **Filters & Tags**     | Rich set, supports macros                     | Limited compared to Jinja                       |
+| **Whitespace Control** | Allows fine-grained control                   | More rigid and less flexible                    |
+| **Extensibility**      | Easily supports custom filters and extensions | Limited customization                           |
+| **Security**           | Requires manual escaping for security         | Auto-escapes to prevent XSS                     |
+| **Use Case**           | Preferred for flexibility in complex projects | Best for built-in Django templates and security |
+
+Later I resumed working on my To-Do app. I have implemented Create feature using Forms. As well as, integrated bootstrap for attractive UI -> [Styled Home Page](/Snapshots/Todo_Home_Styled.png)
+
+That's it for today! See you on Monday!
