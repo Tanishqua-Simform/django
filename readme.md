@@ -800,3 +800,28 @@ def person_view(request):
 Later I resumed working on my To-Do app. I have implemented Create feature using Forms. As well as, integrated bootstrap for attractive UI -> [Styled Home Page](/Snapshots/Todo_Home_Styled.png)
 
 That's it for today! See you on Monday!
+
+##### Dt. 10 Mar, 2025.
+
+Today we will cover all the topics we have learnt so far in more depth to make them stronger.
+
+I have covered -
+
+- MVC vs. MVT architecture.
+- Url router is the Controller in MVT.
+- ORM is to make database queries from python. It protects from SQL injections and CSRF issues.
+- ORM Methods / QuerySet API - create(), save(), update(), delete(), filter(), get()
+- Change databases using - dumpdata and loaddata
+  - Dumps data of older db into json file and then loads it from json file to new db
+- Integrate NoSql in Django using Adapter - djongo. Also, we can use DRF for mongodb
+- Data migrations, Conflict in Migration - makemigration --merge
+- Fake migration - migrate --fake
+- Meta class - Inner class that holds meta data. db_table, verbose_name, permissions etc actions can be performed in it.
+- Group by in Django using values() followed by annotate()
+
+For deeper understanding it is better that I provide you the link to my chat with GPT - [Link](https://chatgpt.com/share/67ceee24-1288-8008-8f93-bfe305c00ecb)
+
+Other than this, I helped my co-trainee with her git assignment, as she joined late and had a few conceptual doubts in the basics.
+I also helped another trainee with issues in creating form with POST methods and integrating bootstrap in it.
+
+That's it for today. See you tomorrow!
