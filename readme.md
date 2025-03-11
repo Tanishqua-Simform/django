@@ -825,3 +825,31 @@ Other than this, I helped my co-trainee with her git assignment, as she joined l
 I also helped another trainee with issues in creating form with POST methods and integrating bootstrap in it.
 
 That's it for today. See you tomorrow!
+
+##### Dt. 11 Mar, 2025.
+
+Today we will see Views and Forms in detail.
+
+- **FBV** – Function-Based Views; define views using functions to handle HTTP requests.
+- **Redirect and reverse** – `redirect()` sends users to a different URL; `reverse()` generates URLs dynamically using names.
+- **HttpResponse and JsonResponse** – `HttpResponse` returns plain HTML; `JsonResponse` returns JSON data.
+- **CBV** – Class-Based Views; define views using Python classes for better reusability and organization.
+- **Prebuilt CBVs – ListView and DetailView** – `ListView` shows a list of objects; `DetailView` shows details of a single object.
+- **Decorators in Views** – `@login_required`, `@csrf_exempt`, etc., modify the behavior of views.
+- **CSRF Token and CSRF Exempt** – CSRF token prevents cross-site request forgery; `@csrf_exempt` disables CSRF protection for a view.
+
+- **Forms** – Used to collect and validate user input.
+- **Form API** – Provides built-in methods for rendering and validating forms.
+- **Custom Validation – use validator attribute** – Use `validators` to define custom validation rules in fields.
+- **ModelForm** – A form tied to a database model for quick data handling.
+- **Custom Validation – make function with `clean_` prefix** – Define a `clean_<fieldname>()` method to add custom validation logic.
+- **Formsets – handle multiple forms** – Manage multiple forms simultaneously using `formsets`.
+- **Runserver** – `python manage.py runserver` starts the development server.
+
+For deeper understanding refer this chat -> [Views and Forms](https://chatgpt.com/share/67d048c2-e16c-8008-9cbd-8ead8b42a103)
+
+Along with this, I practiced 10 different scenarios in Views and 6 scenarios in Forms. I will practice a few more tomorrow!
+
+You can checkout the tasks done here -> [Views](/Practice_Tasks/Prac_View/) and [Forms](/Practice_Tasks/Prac_Form/)
+
+See you tomorrow! Bye!
