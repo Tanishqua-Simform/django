@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Prac_View',
     'Prac_Form',
+    'Prac_Crispy',
+    'crispy_forms',
+    'crispy_bootstrap5',
+    'Prac_Auth',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +127,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# For Crispy Forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

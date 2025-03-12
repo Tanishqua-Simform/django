@@ -12,3 +12,7 @@ class TaskModel(models.Model):
 class ProfileModel(models.Model):
     name = models.CharField(max_length=50)
     age = models.IntegerField()
+
+class BookingModel(models.Model):
+    name = models.CharField(max_length=50)
+    date = models.DateTimeField()

@@ -21,4 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('view/', include("Prac_View.urls")),
     path('form/', include("Prac_Form.urls")),
+    path('crispy/', include("Prac_Crispy.urls")),
+    path('auth/', include("Prac_Auth.urls")),
 ]
