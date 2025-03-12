@@ -853,3 +853,34 @@ Along with this, I practiced 10 different scenarios in Views and 6 scenarios in 
 You can checkout the tasks done here -> [Views](/Practice_Tasks/Prac_View/) and [Forms](/Practice_Tasks/Prac_Form/)
 
 See you tomorrow! Bye!
+
+##### Dt. 12 Mar, 2025.
+
+Today we will study Crispy forms, and Authentication in Django.
+
+Before that, I will finish few tasks in [Forms](/Practice_Tasks/Prac_Form/)
+
+- **Crispy Forms**
+  - Django Crispy Forms is a third-party package used to render Django forms elegantly with minimal boilerplate code.
+  - It supports Bootstrap and other front-end frameworks for styling forms.
+  - Provides helper classes and templates to customize form layouts easily.
+  - Improves the consistency and appearance of forms across the application.
+
+✅ **When to Use Crispy Forms**
+
+- ✔️ When you want cleaner form rendering.
+- ✔️ When you need Bootstrap or Tailwind integration.
+- ✔️ When you want to customize form structure without manually adjusting HTML.
+
+- **Authentication**
+  - Django provides a built-in authentication framework for handling user login, logout, and registration.
+  - Supports user sessions, password hashing, and secure cookies.
+  - Provides authentication decorators like `@login_required` for restricting access to views.
+  - Includes user model customization for handling user profiles and permissions.
+  - Offers authentication backends for using external authentication sources (e.g., OAuth).
+
+Later, I practiced both the concepts. [Crispy Forms](/Practice_Tasks/Prac_Crispy/) and [Authentication](/Practice_Tasks/Prac_Auth/)
+
+I have to integrate password change and permissions in authentication. I will do that tomorrow.
+
+See you! Bye!
