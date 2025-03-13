@@ -884,3 +884,17 @@ Later, I practiced both the concepts. [Crispy Forms](/Practice_Tasks/Prac_Crispy
 I have to integrate password change and permissions in authentication. I will do that tomorrow.
 
 See you! Bye!
+
+##### Dt. 13 Mar, 2025.
+
+Happy Holi!
+
+Today we will complete authentication tasks and permissions.
+
+I have completed few tasks in [Prac_Auth](<(/Practice_Tasks/Prac_Auth/)>)
+
+The resources for authentication can be found from this chat -> [Chatgpt link](https://chatgpt.com/share/67ceee24-1288-8008-8f93-bfe305c00ecb)
+
+Although I haven't achieved much today, it was great bonding with other trainees. So yes, I would consider today's day more towards team bonding!
+
+So that's it fpr today! See you on Monday! After the long weekend!
