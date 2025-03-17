@@ -33,15 +33,21 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Actions
+            Profile
           </a>
           <ul class="dropdown-menu">
             <li>
               <a class="dropdown-item" href="{% url 'create_todo' %}">Create</a>
             </li>
-            <li><a class="dropdown-item" href="#">Update</a></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'completed_todos' %}"
+                >Completed</a
+              >
+            </li>
             <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Delete</a></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+            </li>
           </ul>
         </li>
       </ul>

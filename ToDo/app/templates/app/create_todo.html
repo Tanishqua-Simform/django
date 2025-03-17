@@ -1,26 +1,11 @@
-{% extends 'app/base.html' %} {% block content %}
+{% extends 'app/base.html' %} {% load crispy_forms_tags %} {% block content %}
 <h3 class="d-flex justify-content-center align-items-center mt-5 mb-5">
   Create Todo
 </h3>
 <div class="row">
   <div class="col-md-7 mx-auto">
-    <form action="">
-      {% for field in form %}
-      <label for="{{field.id_for_label}}" class="form-label"
-        >{{field.label}}</label
-      >
-
-      <input
-        class="form-control"
-        type="{{field.field.widget.input_type}}"
-        name="{{field.name}}"
-        id="{{field.id_for_label}}"
-        value="{{field.value | default:''}}"
-        placeholder="{{field.field.widget.attrs.placeholder | default:''}}"
-        required="{{field.field.required}}"
-      ></input>
-      <br />
-      {% endfor %}
+    <form method="post">
+      {% csrf_token %} {{form | crispy }}
       <div class="col-md-2 mx-auto">
         <input type="submit" value="Submit" class="btn btn-success" />
       </div>

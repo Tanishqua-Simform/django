@@ -1,39 +1,40 @@
 {% extends 'app/base.html' %} {% block content %}
-
 <h1 class="d-flex justify-content-center align-items-center mt-5">
-  Welcome Back, Tanishqua
+  {% block page %} Welcome Back, {{request.user}} {% endblock page %}
 </h1>
-<h3 class="d-flex justify-content-center align-items-center mt-5 mb-5">
+<h3 class="d-flex justify-content-around align-items-center mt-5 mb-5">
   {% block title%} My Todos {% endblock title %}
 </h3>
-<ul>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Task No.</th>
-        <th scope="col">Title</th>
-        <th scope="col">Status</th>
-        <th scope="col">Priority</th>
-        <th scope="col">Due Date</th>
-        <th scope="col">Details</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for task in todo_list %}
-      <tr>
-        <th scope="row">{{task.id}}</th>
-        <td>{{task.title}}</td>
-        <td>{{task.status}}</td>
-        <td>{{task.priority}}</td>
-        <td>{{task.due_date}}</td>
-        <td>
-          <a class="btn btn-info" href="{% url 'details' task.id %}">
-            Details
-          </a>
-        </td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</ul>
+<a class="btn btn-success mb-5" href="{% url 'create_todo' %}"> Create </a>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Task No.</th>
+      <th scope="col">Title</th>
+      <th scope="col">Status</th>
+      <th scope="col">Assigned by</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Due Date</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in todo_list %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{task.title}}</td>
+      <td>{{task.status}}</td>
+      <td>{{task.assigned_by}}</td>
+      <td>{{task.priority}}</td>
+      <td>{{task.due_date}}</td>
+      <td>
+        <a class="btn btn-info" href="{% url 'details' task.id %}"> Details </a>
+        <a class="btn btn-warning" href="{% url 'update' task.id %}"> Edit </a>
+        <a class="btn btn-danger" href="{% url 'delete' task.id %}"> Delete </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 {% endblock content %}
