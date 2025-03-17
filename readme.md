@@ -898,3 +898,135 @@ The resources for authentication can be found from this chat -> [Chatgpt link](h
 Although I haven't achieved much today, it was great bonding with other trainees. So yes, I would consider today's day more towards team bonding!
 
 So that's it fpr today! See you on Monday! After the long weekend!
+
+##### Dt. 17 Mar, 2025.
+
+Today we will see permissions, middleware, static and media files.
+
+#### Permissions
+
+- Django permissions control access to views, models, and actions based on user roles.
+- Default permissions (`add`, `change`, `delete`, `view`) are automatically created for each model.
+- Permissions are assigned at the user and group level.
+
+**Custom Permissions**
+
+- Custom permissions can be defined in the `Meta` class of a model using the `permissions` attribute.
+- Example:
+  ```python
+  class MyModel(models.Model):
+      class Meta:
+          permissions = [("can_publish", "Can publish articles")]
+  ```
+
+**Group Permissions**
+
+- Groups allow assigning permissions collectively to multiple users.
+- Users inherit all permissions assigned to the group.
+- Example: Create an `editor` group and assign permissions to it.
+
+**@permission_required Decorator**
+
+- Restricts access to a view based on user permissions.
+- Example:
+  ```python
+  @permission_required('app.can_publish')
+  def my_view(request):
+      pass
+  ```
+
+**has_perm() Method**
+
+- Checks if a user has a specific permission.
+- Example:
+  ```python
+  if request.user.has_perm('app.can_publish'):
+      pass
+  ```
+
+**Restricting Views**
+
+- `@login_required` – Requires user authentication.
+- `@permission_required` – Requires user to have specific permissions.
+- `PermissionRequiredMixin` – Restricts class-based views.
+
+**PermissionRequiredMixin**
+
+- Used in class-based views to restrict access based on permissions.
+- Example:
+
+  ```python
+  from django.contrib.auth.mixins import PermissionRequiredMixin
+
+  class MyView(PermissionRequiredMixin, View):
+      permission_required = 'app.can_publish'
+  ```
+
+#### Middleware
+
+- Middleware is a lightweight, low-level plugin used to process requests and responses globally before passing them to views.
+- Defined as a list in `MIDDLEWARE` setting in `settings.py`.
+
+**\_\_init\_\_()**
+
+- Called when the middleware is initialized.
+- Used to perform setup tasks.
+
+**\_\_call\_\_()**
+
+- Called for each request.
+- Must return a response object.
+
+**get_response()**
+
+- Called when processing a request or returning a response.
+- Returns a response object.
+
+**process_view()**
+
+- Called before the view function is executed.
+- Can modify the request or return a response directly.
+
+**process_exception()**
+
+- Called if the view raises an exception.
+- Can handle the exception or return an error response.
+
+**process_template_response()**
+
+- Called after the view returns a `TemplateResponse`.
+- Can modify the response before rendering.
+
+#### Static Files and Media Files
+
+- Static files include CSS, JavaScript, and images used in the frontend.
+- Media files include user-uploaded content like images and documents.
+
+**Static Files**
+
+- Defined in `STATIC_URL` and `STATICFILES_DIRS` settings.
+- Example:
+  ```python
+  STATIC_URL = '/static/'
+  STATICFILES_DIRS = [BASE_DIR / 'static']
+  ```
+- Use `{% static 'path/to/file' %}` in templates.
+
+**Media Files**
+
+- Defined in `MEDIA_URL` and `MEDIA_ROOT` settings.
+- Example:
+  ```python
+  MEDIA_URL = '/media/'
+  MEDIA_ROOT = BASE_DIR / 'media'
+  ```
+- Use `models.FileField` and `models.ImageField` for handling uploads.
+- Files are served during development using `django.views.static.serve`.
+
+For detailed explanation of any topic refer this chat -> [ChatGPT](https://chatgpt.com/share/67ceee24-1288-8008-8f93-bfe305c00ecb)
+
+Later, I implemented CRUD operations and authentication in my [TODO](/ToDo/) app.
+
+![Todo Crud](/Snapshots/Todo_CRUD.png)
+
+That's it for today! See you tomorrow!
