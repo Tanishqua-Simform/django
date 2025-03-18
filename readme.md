@@ -1030,3 +1030,213 @@ Later, I implemented CRUD operations and authentication in my [TODO](/ToDo/) app
 ![Todo Crud](/Snapshots/Todo_CRUD.png)
 
 That's it for today! See you tomorrow!
+
+##### Dt. 18 Mar, 2025.
+
+Today we will learn to customize Admin Panel and Signals.
+
+#### Admin Panel Customization
+
+- Django Admin is a built-in interface for managing database models and data.
+- It is enabled by adding `'django.contrib.admin'` in `INSTALLED_APPS`.
+- The admin interface can be accessed at `/admin` after running `python manage.py createsuperuser`.
+
+**list_display**
+
+- Controls which fields are shown in the admin list view.
+- Example:
+
+  ```python
+  @admin.register(Post)
+  class PostAdmin(admin.ModelAdmin):
+      list_display = ('title', 'author', 'published_date')
+  ```
+
+**search**
+
+- Allows searching within admin list views.
+- Example:
+  ```python
+  @admin.register(Post)
+  class PostAdmin(admin.ModelAdmin):
+      search_fields = ('title', 'content')
+  ```
+
+**filter**
+
+- Adds filter options in the admin interface.
+- Example:
+  ```python
+  @admin.register(Post)
+  class PostAdmin(admin.ModelAdmin):
+      list_filter = ('status', 'author')
+  ```
+
+**read_only**
+
+- Makes fields read-only in the admin interface.
+- Example:
+  ```python
+  @admin.register(Post)
+  class PostAdmin(admin.ModelAdmin):
+      readonly_fields = ('slug',)
+  ```
+
+**prepopulated_fields**
+
+- Automatically generates values for fields based on other fields.
+- Example:
+  ```python
+  @admin.register(Post)
+  class PostAdmin(admin.ModelAdmin):
+      prepopulated_fields = {'slug': ('title',)}
+  ```
+
+**actions**
+
+- Allows adding custom actions to the admin interface.
+- Example:
+
+  ```python
+  @admin.register(Post)
+  class PostAdmin(admin.ModelAdmin):
+      actions = ['publish']
+
+      def publish(self, request, queryset):
+          queryset.update(status='published')
+  ```
+
+**grouping fields**
+
+- Groups related fields together in the admin interface.
+- Example:
+  ```python
+  @admin.register(Post)
+  class PostAdmin(admin.ModelAdmin):
+      fieldsets = (
+          ('Content', {'fields': ('title', 'body')}),
+          ('Metadata', {'fields': ('author', 'status', 'slug')}),
+      )
+  ```
+
+**inlines**
+
+- Displays related models within the same admin interface.
+- Example:
+
+  ```python
+  class CommentInline(admin.TabularInline):
+      model = Comment
+      extra = 1
+
+  @admin.register(Post)
+  class PostAdmin(admin.ModelAdmin):
+      inlines = [CommentInline]
+  ```
+
+**admin title**
+
+- Changes the title of the admin panel.
+- Example:
+  ```python
+  admin.site.site_header = "My Blog Admin"
+  admin.site.site_title = "Blog Admin Panel"
+  admin.site.index_title = "Welcome to Blog Admin"
+  ```
+
+**slug**
+
+- A slug is a URL-friendly identifier, often generated from a model field like `title`.
+- Example:
+
+  ```python
+  from django.utils.text import slugify
+
+  class Post(models.Model):
+      title = models.CharField(max_length=200)
+      slug = models.SlugField(unique=True)
+
+      def save(self, *args, **kwargs):
+          if not self.slug:
+              self.slug = slugify(self.title)
+          super().save(*args, **kwargs)
+  ```
+
+#### Signals
+
+- Signals allow decoupled components to get notified when certain actions occur.
+- They enable communication between different parts of a Django application.
+- Useful for performing actions automatically when certain events happen.
+
+**Creating a Signal**
+
+- A signal is created using `django.dispatch.signal`.
+- Example:
+
+  ```python
+  from django.db.models.signals import post_save
+  from django.dispatch import receiver
+  from .models import Post
+
+  @receiver(post_save, sender=Post)
+  def create_slug(sender, instance, created, **kwargs):
+      if created:
+          instance.slug = slugify(instance.title)
+          instance.save()
+  ```
+
+**Connecting Signals**
+
+- Signals are connected using `@receiver` decorator or `connect` method.
+- Example using `connect` method:
+
+  ```python
+  from django.db.models.signals import post_save
+  from .models import Post
+
+  def create_slug(sender, instance, created, **kwargs):
+      if created:
+          instance.slug = slugify(instance.title)
+          instance.save()
+
+  post_save.connect(create_slug, sender=Post)
+  ```
+
+**Types of Signals**
+
+- **pre_save** – Triggered before a model’s `save()` method is called.
+- **post_save** – Triggered after a model’s `save()` method is called.
+- **pre_delete** – Triggered before a model’s `delete()` method is called.
+- **post_delete** – Triggered after a model’s `delete()` method is called.
+- **m2m_changed** – Triggered when a `ManyToManyField` is modified.
+- **request_started** – Triggered when a request starts processing.
+- **request_finished** – Triggered when a request finishes processing.
+- **got_request_exception** – Triggered when an exception occurs during request processing.
+
+**Disconnecting Signals**
+
+- A signal can be disconnected using the `disconnect()` method.
+- Example:
+  ```python
+  post_save.disconnect(create_slug, sender=Post)
+  ```
+
+**Use Cases**
+
+- Creating slugs from titles automatically.
+- Sending email notifications when a user registers.
+- Logging user activities.
+- Caching data after an object is saved.
+
+For in depth knowledge, refer this chat -> [ChatGpt link](https://chatgpt.com/share/67ceee24-1288-8008-8f93-bfe305c00ecb)
+
+Later, I integrated Role-based authentication using groups and permissions in my Todo app as suggested by my mentor, with 2 roles.
+
+- Mentor - Can create, update and delete tasks
+- Mentee - Can only View tasks.
+
+I have also implemented profile photo updation functionality using media files. I have to add resume updation feature, so as to manipulate pdf files.
+
+I have also customized admin panel with list of models, search and filter functionality. I have changed the site_title, index_title and site_header of admin panel as well.
+
+That's it for today! See you tomorrow!
