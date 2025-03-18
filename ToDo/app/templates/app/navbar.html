@@ -25,6 +25,9 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'pending_todos' %}">Pending</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'assigned' %}">Assigned</a>
+        </li>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -45,6 +48,11 @@
               >
             </li>
             <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="{% url 'show_profile' %}"
+                >Profile</a
+              >
+            </li>
             <li>
               <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
             </li>

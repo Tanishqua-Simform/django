@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
+from django.http import QueryDict
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.models import User
 from django.http import HttpResponse
-from app.models import TodoList
+from app.models import TodoList, ProfilePhoto
 from app.forms import CreateTask, CreateTaskModel, RegisterUser, LoginUser, ProfileForm
 
 def register_user(request):
@@ -40,17 +42,20 @@ def logout_user(request):
 
 @login_required(login_url='login')
 def my_todos(request):
-    tasks = TodoList.read_all(TodoList)
+    user = User.objects.get(username=request.user)
+    tasks = TodoList.read_all(TodoList, user.id)
     return render(request, 'app/my_todos.html', {'todo_list': tasks})
 
 @login_required(login_url='login')
 def pending_todos(request):
-    tasks = TodoList.read_pending(TodoList)
+    user = User.objects.get(username=request.user)
+    tasks = TodoList.read_pending(TodoList, user.id)
     return render(request, 'app/pending_todos.html', {'todo_list': tasks})
 
 @login_required(login_url='login')
 def completed_todos(request):
-    tasks = TodoList.read_completed(TodoList)
+    user = User.objects.get(username=request.user)
+    tasks = TodoList.read_completed(TodoList, user.id)
     return render(request, 'app/pending_todos.html', {'todo_list': tasks})
 
 @login_required(login_url='login')
@@ -70,11 +75,14 @@ def create_todo(request):
 @login_required(login_url='login')
 def create_todo_model(request):
     if request.method == 'POST':
-        form = CreateTaskModel(request.POST)
+        user = User.objects.get(username=request.user)
+        data = request.POST.copy()
+        data['assigned_by'] = user.id
+        form = CreateTaskModel(data)
         if form.is_valid():
             form.save()
             messages.success(request, 'Task Created successfully!')
-            return redirect(reverse('my_todos'))
+            return redirect(reverse('assigned'))
     fm = CreateTaskModel()
     return render(request, 'app/create_todo.html', {'form': fm})
 
@@ -96,7 +104,7 @@ def update_todo(request, task_id):
 
             messages.success(request, 'Task Updated successfully!', extra_tags='warning')
             form.save()
-            return redirect(reverse('my_todos'))
+            return redirect(reverse('assigned'))
     fm = CreateTaskModel(instance=task)
     return render(request, 'app/update_todo.html', {'form': fm})
 
@@ -105,22 +113,46 @@ def delete_todo(request, task_id):
     task = TodoList.read_task(TodoList, task_id)
     task.delete()
     messages.error(request, 'Task Deleted successfully!', extra_tags='danger')
-    return redirect(reverse('my_todos'))
+    return redirect(reverse('assigned'))
 
+@login_required(login_url='login')
 def upload_profile(request):
+    user = User.objects.get(username=request.user)
+    profile_obj = ProfilePhoto.objects.filter(user_id=user.id).first()
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            if profile_obj:
+                profile_obj.name = request.POST['name']
+                profile_obj.photo = request.FILES['photo']
+                profile_obj.save()
+            else:
+                form.save()
             messages.success(request, 'Profile added successfully!')
-            # return redirect(reverse(f'show_profile/{request.POST}'))
+            return redirect(reverse('show_profile'))
         else:
             messages.error(request, 'Error Occured!', extra_tags='danger')
-    form = ProfileForm()
-    return render(request, 'app/profile.html', {'form': form})
+    form = ProfileForm(data={'user':request.user})
+    return render(request, 'app/upload_profile.html', {'form': form})
 
-def show_profile(request, user):
-    pass
-    # photo = 'media/profile_'
-    # return render(request, 'app/profile.html', {'form': form})
-    # To be implemented next
+@login_required(login_url='login')
+def show_profile(request):
+    user = User.objects.get(username=request.user)
+    profile_obj = ProfilePhoto.objects.filter(user_id=user.id).first()
+    if profile_obj:
+        path = f'/media/{profile_obj.photo}'
+        name = profile_obj.name
+    else:
+        path='/media/profile_pics/no_profile.png'
+        name='Anonymous User'
+    return render(request, 'app/profile.html', {'path': path, 'name': name})
+
+def is_admin(user):
+    return user.groups.filter(name='Mentor').exists()
+
+@login_required(login_url='login')
+@user_passes_test(is_admin, login_url='my_todos')
+def assigned(request):
+    user = User.objects.get(username=request.user)
+    tasks = TodoList.objects.filter(assigned_by=user.id)
+    return render(request, 'app/assigned.html', {'todo_list': tasks})

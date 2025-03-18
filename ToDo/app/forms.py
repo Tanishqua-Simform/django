@@ -3,6 +3,8 @@ from django.utils.timezone import now
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import TodoList, ProfilePhoto
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Field
 
 class RegisterUser(UserCreationForm):
     class Meta:
@@ -30,9 +32,18 @@ class CreateTaskModel(forms.ModelForm):
     class Meta:
         model = TodoList
         fields = '__all__'
+    
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.fields['assigned_by'].widget = forms.HiddenInput()
 
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = ProfilePhoto
         fields = '__all__'
-        # fields = ['name', 'photo']
+    
+    def __init__(self,*args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.fields['user'].widget = forms.HiddenInput()
