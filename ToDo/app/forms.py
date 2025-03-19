@@ -7,9 +7,20 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit, Layout, Field
 
 class RegisterUser(UserCreationForm):
+    # dept_choice = (
+    #     ('python', 'Python'),
+    #     ('react', 'React'),
+    #     ('ai/ml', 'AI/ML'),
+    #     ('data', 'Data'),
+    # )
+    # first_name = forms.CharField(max_length=50)
+    # last_name = forms.CharField(max_length=50)
+    # department = forms.ChoiceField(choices=dept_choice)
+
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        # fields = ['first_name', 'last_name', 'department', 'username', 'email', 'password1', 'password2']
 
 class LoginUser(forms.Form):
     username = forms.CharField(max_length=100)

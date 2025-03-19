@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from app.models import TodoList, ProfilePhoto
 from app.forms import CreateTask, CreateTaskModel, RegisterUser, LoginUser, ProfileForm
+from app.signals import email_signal
 
 def register_user(request):
     if request.method == 'POST':
@@ -82,6 +83,11 @@ def create_todo_model(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Task Created successfully!')
+            subject = 'New Task Created!'
+            receiver = User.objects.get(id=request.POST['assigned_to'])
+            to_email = [receiver.email]
+            message = f"Hello {receiver.username}, New task Created by {user.username}"
+            email_signal.send(sender=None, subject=subject, message=message , to_email=to_email)
             return redirect(reverse('assigned'))
     fm = CreateTaskModel()
     return render(request, 'app/create_todo.html', {'form': fm})
@@ -92,6 +98,7 @@ def update_todo(request, task_id):
     task = TodoList.read_task(TodoList, task_id)
     if request.method == 'POST':
         # form = CreateTaskModel(request.POST)
+        user = User.objects.get(username=request.user)
         form = CreateTaskModel(request.POST, instance=task)
         if form.is_valid():
             # task.title = request.POST['title']
@@ -102,8 +109,13 @@ def update_todo(request, task_id):
             # task.assigned_by = request.POST['assigned_by']
             # task.save()
 
-            messages.success(request, 'Task Updated successfully!', extra_tags='warning')
             form.save()
+            messages.success(request, 'Task Updated successfully!', extra_tags='warning')
+            subject = 'Old Task Updated!'
+            receiver = User.objects.get(id=request.POST['assigned_to'])
+            to_email = [receiver.email]
+            message = f"Hello {receiver.username}, Previous task was Updated by {user.username}"
+            email_signal.send(sender=None, subject=subject, message=message , to_email=to_email)
             return redirect(reverse('assigned'))
     fm = CreateTaskModel(instance=task)
     return render(request, 'app/update_todo.html', {'form': fm})
@@ -111,8 +123,15 @@ def update_todo(request, task_id):
 @login_required(login_url='login')
 def delete_todo(request, task_id):
     task = TodoList.read_task(TodoList, task_id)
+    assigned_to = task.assigned_to
     task.delete()
     messages.error(request, 'Task Deleted successfully!', extra_tags='danger')
+    user = User.objects.get(username=request.user)
+    subject = 'Task Deleted!'
+    receiver = User.objects.get(id=assigned_to.id)
+    to_email = [receiver.email]
+    message = f"Hello {receiver.username}, Task was Deleted by {user.username}"
+    email_signal.send(sender=None, subject=subject, message=message , to_email=to_email)
     return redirect(reverse('assigned'))
 
 @login_required(login_url='login')
@@ -147,11 +166,11 @@ def show_profile(request):
         name='Anonymous User'
     return render(request, 'app/profile.html', {'path': path, 'name': name})
 
-def is_admin(user):
+def is_mentor(user):
     return user.groups.filter(name='Mentor').exists()
 
 @login_required(login_url='login')
-@user_passes_test(is_admin, login_url='my_todos')
+@user_passes_test(is_mentor, login_url='my_todos')
 def assigned(request):
     user = User.objects.get(username=request.user)
     tasks = TodoList.objects.filter(assigned_by=user.id)

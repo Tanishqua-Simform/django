@@ -5,7 +5,7 @@
 <h3 class="d-flex justify-content-center align-items-center mt-5 mb-5">
   {% block title%} Hello, {{name}}! {% endblock title %}
 </h3>
-<div class="mx-auto col-lg-2">
+<div class="mx-auto col-lg-3">
   <img
     src="{{path}}"
     alt="Profile Picture"
@@ -13,6 +13,8 @@
     width="320"
     style="border-radius: 100%"
   />
-  <a class="btn btn-info" href="{% url 'upload_profile' %}"> Change Profile </a>
+  <a class="btn btn-info m-5" href="{% url 'upload_profile' %}">
+    Change Profile
+  </a>
 </div>
 {% endblock content %}
