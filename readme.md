@@ -1240,3 +1240,100 @@ I have also implemented profile photo updation functionality using media files. 
 I have also customized admin panel with list of models, search and filter functionality. I have changed the site_title, index_title and site_header of admin panel as well.
 
 That's it for today! See you tomorrow!
+
+##### Dt. 19 Mar, 2025.
+
+Today we will implement middleware and signals in Todo app and read about jinja template and custom template tags.
+
+#### Jinja Template
+
+- Jinja is a fast, expressive, and extensible templating engine used in Django.
+- It allows embedding Python-like expressions within HTML.
+- Syntax is similar to DTL (Django Template Language) but more powerful and flexible.
+- Used for rendering dynamic content in templates.
+- Example:
+  ```html
+  {% for item in items %} {{ item.name }} {% endfor %}
+  ```
+
+**Custom Template Tags**
+
+- Custom template tags allow adding custom logic in templates.
+- Defined using `{% register %}` in a `templatetags` directory.
+- Example:
+
+  1.  Create a `templatetags` directory inside the app.
+  2.  Create a `custom_tags.py` file:
+
+      ```python
+      from django import template
+      register = template.Library()
+
+      @register.simple_tag
+      def add(x, y):
+          return x + y
+      ```
+
+  3.  Use in the template:
+      ```html
+      {% load custom_tags %} {% add 5 10 %}
+      ```
+
+**Built-in Template Tags**
+
+- Predefined tags provided by Django for common tasks.
+- **Control flow tags**:
+
+  - `{% if %}...{% endif %}` – Conditional statements.
+  - `{% for %}...{% endfor %}` – Loop through iterable objects.
+  - `{% block %}...{% endblock %}` – Define and override template blocks.
+  - `{% include %}` – Include another template.
+  - `{% extends %}` – Extend a base template.
+  - `{% with %}` – Create a temporary context variable.
+  - `{% csrf_token %}` – Protect against CSRF attacks.
+
+- **Template Inheritance**:
+
+  - `{% block %}` and `{% extends %}` allow creating reusable templates.
+  - Example:
+
+    ```html
+    {% extends 'base.html' %} {% block content %}
+    <h1>Welcome</h1>
+    {% endblock %}
+    ```
+
+**Filters**
+
+- Filters modify the value of a variable before rendering.
+- Applied using the `|` (pipe) operator.
+- Example:
+
+  ```html
+  {{ name|lower }} {{ price|floatformat:2 }}
+  ```
+
+- **Common Built-in Filters**:
+  - `lower` – Converts string to lowercase.
+  - `upper` – Converts string to uppercase.
+  - `length` – Returns the length of an object.
+  - `default` – Sets a default value if the value is None.
+  - `floatformat` – Formats a float to a specific number of decimal places.
+  - `date` – Formats a date object.
+  - `escape` – Escapes HTML special characters.
+  - `truncatechars` – Truncates a string to a specific length.
+  - `safe` – Marks a string as safe to render HTML.
+
+**Use Cases**
+
+- Custom template tags are used when logic is too complex for filters.
+- Filters are used for formatting and simple transformations.
+- Jinja templates are used to separate logic from presentation, making code cleaner.
+
+Later, I implemented custom middleware in the Todo App. It records the last login time of users and the number of times they have logged in. It also stores the total requests that the server has served in its lifetime.
+
+I have also created custom signals for create, update and delete task views. Whenever the signal is triggered it sends an email to the assignee about the change.
+
+You can track the progress here -> [Todo App](/ToDo/app/middleware/user_visits.py)
+
+That's it for today! See you tomorrow!
