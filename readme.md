@@ -1337,3 +1337,143 @@ I have also created custom signals for create, update and delete task views. Whe
 You can track the progress here -> [Todo App](/ToDo/app/middleware/user_visits.py)
 
 That's it for today! See you tomorrow!
+
+##### Dt. 20 Mar, 2025.
+
+Today we will see test cases in django as well as Jinja template and custom template tags in detail.
+
+#### Test Cases
+
+- Test cases are used to verify the correctness of code in Django.
+- Django provides a `unittest`-based testing framework.
+- Tests ensure that the application behaves as expected after changes.
+
+**Types of Test Cases**
+
+- **Unit Tests** – Test individual units of code (e.g., functions, models).
+- **Integration Tests** – Test how different components work together.
+- **Functional Tests** – Test user-facing behavior.
+
+**Creating a Test Case**
+
+- Create a `tests.py` file inside the app.
+- Example:
+
+  ```python
+  from django.test import TestCase
+  from .models import Item
+
+  class ItemModelTest(TestCase):
+      def test_item_creation(self):
+          item = Item.objects.create(name="Test Item")
+          self.assertEqual(item.name, "Test Item")
+  ```
+
+**Running Tests**
+
+- Run all tests:
+  ```bash
+  python manage.py test
+  ```
+- Run tests in a specific app:
+  ```bash
+  python manage.py test myapp
+  ```
+- Run a specific test file:
+  ```bash
+  python manage.py test myapp.tests
+  ```
+
+**Assertions**
+
+- `assertEqual(a, b)` – Checks if `a == b`.
+- `assertNotEqual(a, b)` – Checks if `a != b`.
+- `assertTrue(x)` – Checks if `x` is `True`.
+- `assertFalse(x)` – Checks if `x` is `False`.
+- `assertIsNone(x)` – Checks if `x` is `None`.
+- `assertIsNotNone(x)` – Checks if `x` is not `None`.
+- `assertRaises(Exception)` – Checks if an exception is raised.
+
+**TestCase Methods**
+
+- `setUp()` – Called before each test method.
+- `tearDown()` – Called after each test method.
+- `setUpTestData()` – Sets up data at the class level (called once).
+
+**Client Testing**
+
+- Django provides a `Client` class for simulating HTTP requests.
+- Example:
+
+  ```python
+  from django.test import Client
+
+  def test_homepage(self):
+      client = Client()
+      response = client.get('/')
+      self.assertEqual(response.status_code, 200)
+  ```
+
+**Testing Views**
+
+- Example:
+  ```python
+  def test_view(self):
+      response = self.client.get('/my-view/')
+      self.assertEqual(response.status_code, 200)
+      self.assertTemplateUsed(response, 'my_template.html')
+  ```
+
+**Testing Models**
+
+- Example:
+  ```python
+  def test_model(self):
+      item = Item.objects.create(name="Test Item")
+      self.assertEqual(str(item), "Test Item")
+  ```
+
+**Testing Forms**
+
+- Example:
+  ```python
+  def test_form_valid(self):
+      form = MyForm(data={'name': 'Test'})
+      self.assertTrue(form.is_valid())
+  ```
+
+**Testing Signals**
+
+- Example:
+
+  ```python
+  from django.db.models.signals import post_save
+
+  def test_signal(self):
+      with self.assertSignal(post_save):
+          Item.objects.create(name="Test Item")
+  ```
+
+**TestCase Best Practices**
+
+- Write tests for both success and failure cases.
+- Keep tests isolated from external services.
+- Use `setUpTestData()` for reusable test data.
+- Keep test names descriptive.
+- Avoid hardcoding data; use dynamic values where possible.
+
+To get in depth understanding of topics covered till now refer this chat -> [ChatGPT](https://chatgpt.com/share/67ceee24-1288-8008-8f93-bfe305c00ecb)
+
+Later I implemented DRY principle in my Todo App and cleaned the templates by reusing the code (block and extends tag were helpful in this!)
+
+During that I encountered a problem in which my prettier extension was incorrectly formatting my templates, so I installed beautify extension instead. For configuration refer this blog: [Beautify for templates](https://gotofritz.net/blog/fixing-autoformatting-django-templates-in-visual-studio-code/)
+
+I discovered about XSS attacks and how django prevents it by using escaping feature: [GFG article](https://www.geeksforgeeks.org/cross-site-scripting-xss-protection-in-django/)
+
+I have also implemented search bar functionality in My todos page from the backend, although it requires to reload the page which is not efficient. Instead we should use JS Dom manipulation and AJAX calls for efficiency.
+
+Along with this, I have removed Navbar from Login and Register page.
+
+So that's it for today! See you tomorrow!
+
+P.S. I have a practice match for SPL later today! Will let you know how it goes tomorrow. Toodles!
