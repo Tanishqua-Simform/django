@@ -1,6 +1,6 @@
 {% extends 'app/base.html' %} {% load crispy_forms_tags %} {% block content %}
 <h3 class="d-flex justify-content-center align-items-center mt-5 mb-5">
-  Create Todo
+  {% block crud_page_title %}Create Todo{%endblock%}
 </h3>
 <div class="row">
   <div class="col-md-7 mx-auto">

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import QueryDict
+from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.contrib import messages
@@ -45,7 +45,13 @@ def logout_user(request):
 def my_todos(request):
     user = User.objects.get(username=request.user)
     tasks = TodoList.read_all(TodoList, user.id)
-    return render(request, 'app/my_todos.html', {'todo_list': tasks})
+    if request.method=='POST':
+        search = request.POST['search']
+        data = tasks.filter(Q(title__icontains=search)| Q(priority__istartswith=search) | Q(status__istartswith=search))
+        if not data:
+            messages.error(request, 'Oops No data available!', extra_tags='danger')
+        return render(request, 'app/my_todos.html', {'todo_list': data, 'search': True})
+    return render(request, 'app/my_todos.html', {'todo_list': tasks, 'search': True})
 
 @login_required(login_url='login')
 def pending_todos(request):

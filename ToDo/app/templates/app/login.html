@@ -1,4 +1,7 @@
-{% extends 'app/base.html' %} {% load crispy_forms_tags %} {% block content %}
+{% extends 'app/base.html' %}
+{% load crispy_forms_tags %}
+{% block navbar %}{% endblock %}
+{% block content %}
 <h1 class="d-flex justify-content-center align-items-center mt-5">Login</h1>
 <h3 class="d-flex justify-content-around align-items-center mt-5 mb-5">
   {% block title%} To Do Tracker {% endblock title %}
@@ -12,4 +15,4 @@
     Not registered yet? <a href="{% url 'register' %}"> Register Now</a>
   </div>
 </div>
-{% endblock content %}
+{% endblock content %} {% block footer %} Copyright - To Do Tracker {%endblock%}
