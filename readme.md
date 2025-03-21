@@ -1477,3 +1477,135 @@ Along with this, I have removed Navbar from Login and Register page.
 So that's it for today! See you tomorrow!
 
 P.S. I have a practice match for SPL later today! Will let you know how it goes tomorrow. Toodles!
+
+##### Dt. 21 Mar, 2025.
+
+Today we will implement Test cases and read about channels.
+
+#### Channels
+
+- Django Channels extends Django to handle real-time asynchronous communications like WebSockets, chat applications, and background tasks.
+- It integrates with Django's request/response cycle but allows asynchronous features.
+- Uses **Daphne** as an ASGI server to process requests asynchronously.
+- Supports WebSockets, long polling, and other async protocols.
+
+**Key Concepts**
+
+- **Consumers**: Handle WebSocket connections like Django views handle HTTP requests.
+- **Routing**: Similar to Django URL routing but for WebSockets.
+- **Layers**: Uses Redis for message passing between different parts of the application.
+- **Middleware Stacks**: Modify incoming WebSocket requests like Django’s middleware.
+
+**Use Cases**
+
+- Real-time chat applications
+- Live notifications
+- Background task processing
+- Multiplayer gaming
+
+#### Custom Response, Exceptions, and Mixins
+
+**Custom Response**
+
+- Django provides `HttpResponse` and `JsonResponse` to return custom responses.
+- You can customize status codes, headers, and response formats.
+
+**Examples**
+
+```python
+from django.http import JsonResponse, HttpResponse
+
+def custom_json_response(request):
+    data = {"message": "Success", "status": 200}
+    return JsonResponse(data, status=200)
+
+def custom_text_response(request):
+    return HttpResponse("Custom Text Response", content_type="text/plain", status=201)
+```
+
+**Custom Exceptions**
+
+- Django provides built-in exceptions like `Http404` and `PermissionDenied`, but custom exceptions help in handling specific errors.
+
+**Creating Custom Exceptions**
+
+```python
+class CustomAPIException(Exception):
+    def __init__(self, message="Custom error occurred"):
+        self.message = message
+        super().__init__(self.message)
+```
+
+**Raising Custom Exceptions in Views**
+
+```python
+from django.http import JsonResponse
+
+def custom_exception_view(request):
+    raise CustomAPIException("Invalid operation")
+```
+
+**Handling Custom Exceptions**
+
+```python
+from django.core.exceptions import PermissionDenied
+
+def custom_error_handler(request):
+    try:
+        # Some operation
+        pass
+    except PermissionDenied:
+        return JsonResponse({"error": "Permission Denied"}, status=403)
+    except CustomAPIException as e:
+        return JsonResponse({"error": str(e)}, status=400)
+```
+
+**Mixins**
+
+- Mixins are reusable classes that provide additional functionality to Django views.
+- Used in **Class-Based Views (CBVs)** to enhance functionality without duplication.
+
+**Common Django Mixins**
+
+- `LoginRequiredMixin` – Restricts access to authenticated users.
+- `PermissionRequiredMixin` – Restricts access based on user permissions.
+- `UserPassesTestMixin` – Restricts access based on custom conditions.
+
+**Example Usage**
+
+```python
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
+from .models import Item
+
+class SecureItemListView(LoginRequiredMixin, ListView):
+    model = Item
+    template_name = 'items.html'
+    login_url = '/login/'  # Redirect to login if not authenticated
+```
+
+**Custom Mixin**
+
+```python
+class AdminRequiredMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_staff:
+            return JsonResponse({"error": "Admin access required"}, status=403)
+        return super().dispatch(request, *args, **kwargs)
+```
+
+**When to Use Mixins?**
+
+✔ When you need reusable functionality across multiple views.  
+✔ When following **DRY (Don't Repeat Yourself)** principles.  
+✔ When you need authentication, permission checks, or custom behavior in CBVs.
+
+Along with this, I have implemented test cases for models, views and forms in [tests.py](/ToDo/app/tests.py)
+
+I have used Client() to simulate browser request in test cases.
+
+I found this interesting issue on Multiple Inheritance of models in Django using Abstract Models [StackOverFlow](https://stackoverflow.com/questions/6428075/is-it-ok-to-use-multiple-inheritance-with-django-abstract-models)
+
+So that's it for today! See you on Monday.
+
+P.S. - Cricket Update - So it was quite fun yesterday @ the practice match, although we lost I am happy that our team gave its best. Toodles!
