@@ -1609,3 +1609,20 @@ I found this interesting issue on Multiple Inheritance of models in Django using
 So that's it for today! See you on Monday.
 
 P.S. - Cricket Update - So it was quite fun yesterday @ the practice match, although we lost I am happy that our team gave its best. Toodles!
+
+##### Dt. 22 Mar, 2025.
+
+Today we will revise the concepts Channels and Mixins.
+
+I found these interesting articles have a look.
+
+- [StreamingHttpResponse](https://andrewbrookins.com/django/how-does-djangos-streaminghttpresponse-work-exactly/)
+- [Hash Algorithm in Python - SipHash](https://andrewbrookins.com/technology/pythons-default-hash-algorithm/)
+- [Web Sockets](https://www.geeksforgeeks.org/what-is-web-socket-and-how-it-is-different-from-the-http/)
+- [Custom Permissions](https://www.django-rest-framework.org/api-guide/permissions/)
+
+I have read about channels, custom responses, exceptions and mixins in detail. You can refer this chat -> [ChatGPT](https://chatgpt.com/share/67ceee24-1288-8008-8f93-bfe305c00ecb)
+
+Today, I have my league match, So I am leaving early. Wish me luck!
+
+See you tomorrow! Byee!
