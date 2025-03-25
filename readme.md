@@ -1610,7 +1610,7 @@ So that's it for today! See you on Monday.
 
 P.S. - Cricket Update - So it was quite fun yesterday @ the practice match, although we lost I am happy that our team gave its best. Toodles!
 
-##### Dt. 22 Mar, 2025.
+##### Dt. 24 Mar, 2025.
 
 Today we will revise the concepts Channels and Mixins.
 
@@ -1626,3 +1626,114 @@ I have read about channels, custom responses, exceptions and mixins in detail. Y
 Today, I have my league match, So I am leaving early. Wish me luck!
 
 See you tomorrow! Byee!
+
+##### Dt. 25 Mar, 2025.
+
+Today we will study sessions and tokens.
+
+#### Sessions
+
+- Django provides a session framework to store user data across requests.
+- Stores session data on the **server-side**, while the client receives a session ID.
+- Uses cookies to identify a session but does not store sensitive data on the client.
+- The session data can be stored in:
+  - **Database-backed sessions** (default)
+  - **File-based sessions**
+  - **Cached sessions** (Memcached, Redis)
+  - **Signed cookies**
+
+**Working of Sessions**
+
+1. When a user logs in, Django generates a **session ID** and stores it in a cookie.
+2. Django saves session-related data on the server, linked to the session ID.
+3. On subsequent requests, the session ID is sent in the cookie to retrieve the user’s data.
+
+**Using Sessions in Django**
+
+```python
+# Set session data
+request.session['username'] = 'JohnDoe'
+
+# Get session data
+username = request.session.get('username', 'Guest')
+
+# Delete a session key
+del request.session['username']
+
+# Clear all session data
+request.session.flush()
+```
+
+**Advantages of Sessions**
+
+✔ Secure since sensitive data is not stored on the client.  
+✔ Stores user preferences, authentication data, and cart details in e-commerce applications.  
+✔ Can be easily customized with different storage backends.
+
+#### **Tokens**
+
+- **Tokens** are used for **stateless authentication** and API security.
+- Unlike sessions, tokens do not require server-side storage for user authentication.
+- Django Rest Framework (DRF) provides **Token Authentication** as an alternative to sessions.
+
+**Types of Tokens**
+
+1. **Simple Token** – A single token is assigned per user.
+2. **JWT (JSON Web Token)** – A self-contained token with user details, expiration time, and signature.
+3. **OAuth Tokens** – Used for third-party authentication.
+
+**How Token Authentication Works?**
+
+1. User logs in and receives a **token** instead of a session ID.
+2. The token is sent with every request in the `Authorization` header.
+3. The server verifies the token without storing any user session.
+
+**Example of Token Authentication in DRF**
+
+```python
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
+
+# Generate token for a user
+user = User.objects.get(username='JohnDoe')
+token, created = Token.objects.get_or_create(user=user)
+
+# Retrieve token
+print(token.key)
+```
+
+**Sending Token in API Requests**
+
+```http
+GET /protected-resource/
+Authorization: Token <your_token_here>
+```
+
+**Advantages of Token Authentication**
+
+✔ **Stateless** – No need for session storage on the server.  
+✔ **Scalable** – Works well with mobile apps and APIs.  
+✔ **Secure** – Can be easily revoked or refreshed when expired.
+
+#### **Sessions vs Tokens**
+
+| Feature            | Sessions                           | Tokens                                |
+| ------------------ | ---------------------------------- | ------------------------------------- |
+| **Storage**        | Server-side                        | Client-side                           |
+| **Stateful?**      | Yes                                | No                                    |
+| **Usage**          | Web applications                   | APIs and mobile apps                  |
+| **Security**       | Secure but requires server storage | Can be stolen if not secured properly |
+| **Scalability**    | Less scalable due to storage       | Highly scalable                       |
+| **Authentication** | Requires session management        | No session management needed          |
+
+Sessions are preferred for web apps, while tokens are better for APIs and mobile authentication.
+
+I found these articles quite helpful for deeper understanding -
+
+- [Custom User Model](https://www.youtube.com/watch?v=PhrnVgY8A44)
+- [Cross Cutting Concerns](https://medium.com/@abdullah.saalim/what-are-cross-cutting-concerns-how-django-handles-them-1c528283e3d8)
+- [Port vs. Socket](https://medium.com/@i.vikash/difference-between-a-port-and-a-socket-understanding-the-basics-3f4d1a1124bd) | [Video](https://www.youtube.com/watch?v=5iUn5qe7GZo)
+
+Along with this I solved a few questions on Leetcode.
+
+Alright so that's it for today. See you tomorrow!
