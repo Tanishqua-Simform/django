@@ -1737,3 +1737,160 @@ I found these articles quite helpful for deeper understanding -
 Along with this I solved a few questions on Leetcode.
 
 Alright so that's it for today. See you tomorrow!
+
+##### Dt. 26 Mar, 2025.
+
+Today we will see Caching and Transactions in Django.
+
+#### Caching in Django
+
+- Caching is used to store frequently accessed data to improve performance and reduce database queries.
+- Django provides a flexible caching framework with multiple backends.
+- Helps in optimizing expensive computations, database queries, and template rendering.
+
+**Types of Caching in Django**
+
+1. **In-Memory Caching (Memcached, Redis)**
+   - Stores data in RAM for **fast retrieval**.
+   - Suitable for high-traffic applications.
+2. **Database Caching**
+   - Stores cache data in the database using a separate table.
+   - Slower than in-memory caching but more persistent.
+3. **File System Caching**
+   - Stores cache data as files on disk.
+   - Useful when memory caching is not available.
+4. **Local Memory Caching (Default)**
+   - Uses Django’s process memory for caching.
+   - Works only for single-process deployments.
+
+**Setting Up Caching in Django**
+
+**Using Memcached (Recommended for Performance)**
+
+Add the following in `settings.py`:
+
+```python
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+```
+
+**Using Redis**
+
+```python
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://127.0.0.1:6379/1',
+    }
+}
+```
+
+**Using Cache in Views**
+
+```python
+from django.views.decorators.cache import cache_page
+
+@cache_page(60 * 15)  # Cache this view for 15 minutes
+def my_view(request):
+    return HttpResponse("This is a cached response")
+```
+
+**Low-Level Cache API**
+
+```python
+from django.core.cache import cache
+
+# Set cache data
+cache.set('my_key', 'cached_value', timeout=60)
+
+# Get cache data
+value = cache.get('my_key')
+
+# Delete cache data
+cache.delete('my_key')
+```
+
+**Template Fragment Caching**
+
+```html
+{% load cache %} {% cache 300 sidebar %}
+<div>Sidebar content</div>
+{% endcache %}
+```
+
+**Advantages of Caching**
+
+✔ **Reduces database queries** and speeds up response time.  
+✔ **Enhances scalability** for high-traffic applications.  
+✔ **Works seamlessly** with different backends like Redis and Memcached.
+
+#### Transactions in Django
+
+- A **transaction** is a set of database operations that should be executed as a **single unit**.
+- Transactions ensure **data consistency** by following **ACID properties** (Atomicity, Consistency, Isolation, Durability).
+- Django provides built-in support for handling transactions through the **`transaction` module**.
+
+**Using Transactions in Django**
+
+**Auto-Commit (Default Mode)**
+
+- By default, Django commits every query immediately.
+- If an error occurs, only that query fails while others remain committed.
+
+**Manual Transactions Using `atomic`**
+
+- Use `atomic` to execute multiple queries as a single transaction.
+- If an error occurs, **all changes are rolled back**.
+
+```python
+from django.db import transaction
+from myapp.models import Account
+
+@transaction.atomic
+def transfer_funds(sender, receiver, amount):
+    sender_account = Account.objects.get(user=sender)
+    receiver_account = Account.objects.get(user=receiver)
+
+    sender_account.balance -= amount
+    sender_account.save()
+
+    receiver_account.balance += amount
+    receiver_account.save()
+```
+
+**Savepoints in Transactions**
+
+- Allows **partial rollback** within a transaction.
+
+```python
+with transaction.atomic():
+    sid = transaction.savepoint()
+    try:
+        # Perform some operations
+        transaction.savepoint_commit(sid)
+    except Exception:
+        transaction.savepoint_rollback(sid)
+```
+
+**Transaction Management Commands**
+
+| Command                             | Description                                                                  |
+| ----------------------------------- | ---------------------------------------------------------------------------- |
+| `@transaction.atomic`               | Ensures all operations inside the block are treated as a single transaction. |
+| `transaction.set_autocommit(False)` | Turns off auto-commit mode.                                                  |
+| `transaction.commit()`              | Commits all changes to the database.                                         |
+| `transaction.rollback()`            | Rolls back all uncommitted changes.                                          |
+
+**Advantages of Transactions**
+
+✔ Prevents **inconsistent data** due to partial updates.  
+✔ Ensures **data integrity** by rolling back on errors.  
+✔ Helps in **banking, inventory, and reservation systems** where accuracy is critical.
+
+Along with this, I helped a new trainee with their Git Assignment and another trainee in fixing bugs in their Django App.
+
+That's it for today! I will start DRF from Tomorrow. Bye!
