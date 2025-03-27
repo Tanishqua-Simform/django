@@ -1894,3 +1894,175 @@ with transaction.atomic():
 Along with this, I helped a new trainee with their Git Assignment and another trainee in fixing bugs in their Django App.
 
 That's it for today! I will start DRF from Tomorrow. Bye!
+
+###### For in depth knowledge refer the documentation [Django Documentation](https://docs.djangoproject.com/en/5.1/)
+
+##### Dt. 27 Mar, 2025.
+
+Today we will start with DRF.
+
+# Django Rest Framework (DRF)
+
+Django REST Framework (DRF) is a powerful and flexible toolkit for building Web APIs in Django. It provides an easy way to serialize and deserialize data, handle authentication, permissions, and build robust APIs with minimal effort.
+
+### Installation
+
+Install Django and Django REST Framework using pip:
+
+```sh
+pip install django djangorestframework
+```
+
+Add 'rest_framework' to the INSTALLED_APPS list in settings.py:
+
+```python
+INSTALLED_APPS = [
+    ...
+    'rest_framework',
+]
+```
+
+### Creating a Simple API
+
+#### Define a Model
+
+In models.py:
+
+```python
+from django.db import models
+class Book(models.Model):
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=255)
+    published_date = models.DateField()
+```
+
+#### Create a Serializer
+
+In serializers.py:
+
+```python
+from rest_framework import serializers
+from .models import Book
+class BookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Book
+        fields = '__all__'
+```
+
+#### Create a View
+
+In views.py:
+
+```python
+from rest_framework import generics
+from .models import Book
+from .serializers import BookSerializer
+class BookListCreateView(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+```
+
+#### Define URL Patterns
+
+In urls.py:
+
+```python
+from django.urls import path
+from .views import BookListCreateView
+urlpatterns = [
+    path('books/', BookListCreateView.as_view(), name='book-list')
+]
+```
+
+### Authentication and Permissions
+
+#### Enable Authentication in Settings
+
+In settings.py:
+
+```python
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
+```
+
+#### Apply Permission Classes to Views
+
+Modify views.py:
+
+```python
+from rest_framework.permissions import IsAuthenticated
+class BookListCreateView(generics.ListCreateAPIView):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+    permission_classes = [IsAuthenticated]
+```
+
+### Custom API Views
+
+#### Using APIView for More Control
+
+```python
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+class HelloWorldView(APIView):
+    def get(self, request):
+        return Response({"message": "Hello, world!"}, status=status.HTTP_200_OK)
+```
+
+### ViewSets and Routers
+
+#### Using ViewSets for Simplified API Handling
+
+```python
+from rest_framework import viewsets
+from rest_framework.routers import DefaultRouter
+from .models import Book
+from .serializers import BookSerializer
+class BookViewSet(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
+```
+
+#### Registering ViewSets with Routers
+
+```python
+router = DefaultRouter()
+router.register(r'books', BookViewSet)
+```
+
+#### Including Router URLs in URLs Configuration
+
+In urls.py:
+
+```python
+from django.urls import path, include
+urlpatterns = [
+    path('', include(router.urls)),
+]
+```
+
+I have watched the following videos to get the gist of DRF -
+
+- [Django REST framework Setup](https://www.youtube.com/watch?v=44qdTGbWY8c)
+- [Serializers](https://www.youtube.com/watch?v=uzO2PW5jNMk)
+- [Views](https://www.youtube.com/watch?v=DiSoVShaOLI)
+- [GET, UPDATE, POST, DELETE - Function Views](https://www.youtube.com/watch?v=B65zbFro2pU)
+- [REST API Token Authentication for Mobile Apps](https://www.youtube.com/watch?v=v4db49yJPIU)
+- [Register a New User](https://www.youtube.com/watch?v=_OhF6FEdIao)
+- [Generating Authentication Tokens (TokenAuthentication)](https://www.youtube.com/watch?v=Wq6JqXqOzCE)
+- [Restricting Access with Permissions](https://www.youtube.com/watch?v=5JG5PyU1CXI)
+- [Adding Additional Fields to a ModelSerializer using SerializerMethodField](https://www.youtube.com/watch?v=h48Fxecu7EY)
+- [Pagination and Class-Based Views](https://www.youtube.com/watch?v=O79lhytiKd0)
+- [Search Filtering and Ordering](https://www.youtube.com/watch?v=F0tfRtBEkck)
+
+We'll go in depth tomorrow and implement some serializers.
+
+See you tomorrow! Bye.
