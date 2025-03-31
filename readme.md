@@ -2130,3 +2130,13 @@ I have found this amazing site for learning DRF. I will refer this from Monday. 
 We have been assigned a task to create a Project using all the components of Django. So, I need to brainstorm for a nice Problem Statement by Monday and start working on it.
 
 That's it for today. See you on Monday!
+
+##### Dt. 31 Mar, 2025.
+
+Today, I have referred the IQRA Technologies website to learn DRF. I have covered till [Handling API Requests](https://iqratechnology.com/academy/django-rest-framework-training/handling-api-requests/) section. Along with that, I have practiced by making [BookStore](/BookStore/) application using DRF.
+
+I have created books model as well as implemented ModelSerializer and Custom APIViews in it.
+
+I have also decided on making Food Management System as DRF Project to be submitted.
+
+So that's it for today. I will continue from here tomorrow. Bye!
