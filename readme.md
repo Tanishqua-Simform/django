@@ -2140,3 +2140,17 @@ I have created books model as well as implemented ModelSerializer and Custom API
 I have also decided on making Food Management System as DRF Project to be submitted.
 
 So that's it for today. I will continue from here tomorrow. Bye!
+
+##### Dt. 1 Apr, 2025.
+
+Today we will complete DRF and 1 project in it.
+
+I have completed till Authentication and Permissions from [DRF Docs](https://www.django-rest-framework.org/tutorial/4-authentication-and-permissions/)
+
+Along with that, I have implemented various CBVs and FBVs provided by DRF to create API Endpoints.
+
+I was kidding about completing DRF. April Fool's to me! Haha
+
+Found this detailed docs for DRF -> [SkillsHats](https://www.skillshats.com/tutorials/django-rest-framework/viewsets-and-routers/#:~:text=ViewSets%20are%20a%20type%20of%20class-based%20view%20in,etc.%29%20in%20a%20more%20concise%20and%20organized%20way.)
+
+See you tomorrow! Bye!
