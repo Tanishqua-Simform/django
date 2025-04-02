@@ -2154,3 +2154,13 @@ I was kidding about completing DRF. April Fool's to me! Haha
 Found this detailed docs for DRF -> [SkillsHats](https://www.skillshats.com/tutorials/django-rest-framework/viewsets-and-routers/#:~:text=ViewSets%20are%20a%20type%20of%20class-based%20view%20in,etc.%29%20in%20a%20more%20concise%20and%20organized%20way.)
 
 See you tomorrow! Bye!
+
+##### Dt. 2 Apr, 2025.
+
+Today, I have worked on building the architecture for my project - SimFood. It used up a lot of my bandwidth, so I didn't get much time to cover new topics in DRF.
+
+I also looked over authentication and permissions and helped another trainee solve bugs he was facing in this topic.
+
+Although I need to go in depth of these topics a little more, so I will look over this [BLOG](https://dev.to/forhadakhan/multi-role-user-authentication-in-django-rest-framework-3nip) tomorrow and try implement it.
+
+See you tomorrow! Bye.
