@@ -2164,3 +2164,17 @@ I also looked over authentication and permissions and helped another trainee sol
 Although I need to go in depth of these topics a little more, so I will look over this [BLOG](https://dev.to/forhadakhan/multi-role-user-authentication-in-django-rest-framework-3nip) tomorrow and try implement it.
 
 See you tomorrow! Bye.
+
+##### Dt. 3 Apr, 2025.
+
+Today I read a few articles for various kinds of authentication supported by Django.
+
+I found these nice articles while working on my Simfood Project.
+
+[Base64 Encoding](https://medium.com/@kouranyi/base64-encoding-explained-what-it-is-and-why-you-need-it-e6cc89d54f6b) | [DRF Token Based Auth](https://medium.com/django-unleashed/token-based-authentication-and-authorization-in-django-rest-framework-user-and-permissions-347c7cc472e9) | [Django Book](https://djangobook.com/) | [DRF Postgres](https://dev.to/entuziaz/django-rest-framework-with-postgresql-a-crud-tutorial-1l34) | [DRF Custom User Model](https://medium.com/@bly.joel/custom-user-model-with-django-rest-framework-e16ebd91ab0d)
+
+I have setup the project and connected postgres database to it.
+
+I started implementing Custom user model, although I am facing some difficulties today so i will resume from here tomorrow!
+
+That's it for today, See you tomorrow!
