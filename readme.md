@@ -2178,3 +2178,15 @@ I have setup the project and connected postgres database to it.
 I started implementing Custom user model, although I am facing some difficulties today so i will resume from here tomorrow!
 
 That's it for today, See you tomorrow!
+
+##### Dt. 4 Apr, 2025.
+
+Today I have worked on my Project SimFood.
+
+In that I have created custom SimfoodUser model as well as its BaseManager Class. Then I integrated JWT Authentication and configured it as per requirement.
+
+I began creating Task and Menu model inside Headchef App, although it hasn't finished yet. So I will continue working on it from monday.
+
+For Reference - [JWT](https://medium.com/@extio/understanding-json-web-tokens-jwt-a-secure-approach-to-web-authentication-f551e8d66deb)
+
+See you on Monday! Bye.
