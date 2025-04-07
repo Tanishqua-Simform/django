@@ -2190,3 +2190,13 @@ I began creating Task and Menu model inside Headchef App, although it hasn't fin
 For Reference - [JWT](https://medium.com/@extio/understanding-json-web-tokens-jwt-a-secure-approach-to-web-authentication-f551e8d66deb)
 
 See you on Monday! Bye.
+
+##### Dt. 7 Apr, 2025.
+
+Today I will create the task, menu and stats models in my SimFood project. Later I will create its serializers, followed by API Endpoints.
+
+I have referred these StackOverFlow articles while developing SimFood - [Django - multiselectfield Library](https://stackoverflow.com/questions/49065574/how-to-get-and-process-input-for-django-multiselectfield-in-django-rest-framewor) | [Request User in Serializer](https://stackoverflow.com/questions/30203652/how-to-get-request-user-in-django-rest-framework-serializer) | [Serializer's Create Method](https://stackoverflow.com/questions/41735113/how-to-call-serializers-create-method-from-one-serializer)
+
+I have completed all the required task along with proper validation. I have created API Endpoints for HeadChef, rest I will make tomorrow!
+
+So that's it for today. See you tomorrow. Bye!
