@@ -2200,3 +2200,13 @@ I have referred these StackOverFlow articles while developing SimFood - [Django 
 I have completed all the required task along with proper validation. I have created API Endpoints for HeadChef, rest I will make tomorrow!
 
 So that's it for today. See you tomorrow. Bye!
+
+##### Dt. 8 Apr, 2025.
+
+Today I will work on API Endpoints for all the different roles.
+
+I have successfully added all the required API Endpoints, along with custom permissions to handle the visibility of views.
+
+Tomorrow I will create the endpoint for Dashboard.
+
+So that's it for today, see you tomorrow. Bye!
