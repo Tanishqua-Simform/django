@@ -2210,3 +2210,13 @@ I have successfully added all the required API Endpoints, along with custom perm
 Tomorrow I will create the endpoint for Dashboard.
 
 So that's it for today, see you tomorrow. Bye!
+
+##### Dt. 9 Apr, 2025.
+
+Today, I will work on Dashboard endpoint and scheduled tasks.
+
+I have successfully created the pipeline for scheduled task using Celery, celery-beat and Redis. (1/4) tasks has been created. I will create the rest tomorrow. And I have postponed the dashboard endpoint to later time.
+
+I found these medium blogs helpful - [Celery, Celery Beat, Redis](https://saadali18.medium.com/setup-your-django-project-with-celery-celery-beat-and-redis-644dc8a2ac4b) | [Celery Beat - Task scheduling](https://medium.com/@pranavdixit20/custom-task-scheduling-in-python-using-redis-and-celery-3918ee143cac)
+
+That's it for today, see you tomorrow. Bye!
