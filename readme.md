@@ -2220,3 +2220,22 @@ I have successfully created the pipeline for scheduled task using Celery, celery
 I found these medium blogs helpful - [Celery, Celery Beat, Redis](https://saadali18.medium.com/setup-your-django-project-with-celery-celery-beat-and-redis-644dc8a2ac4b) | [Celery Beat - Task scheduling](https://medium.com/@pranavdixit20/custom-task-scheduling-in-python-using-redis-and-celery-3918ee143cac)
 
 That's it for today, see you tomorrow. Bye!
+
+##### Dt. 10 Apr, 2025.
+
+Today, I will work on rest of the scheduled tasks and implement throttling as well as caching in my SimFood Project.
+
+Okay so I have implemented 2 more scheduled tasks and instead of implementing throttling and caching now, rather I have added stored procedures for faster data manipulation than Django ORM.
+
+I found these articles helpful while development -
+
+- [Periodic Tasks [Celery beat] from admin](https://stackoverflow.com/questions/8230833/stopping-purging-periodic-tasks-in-django-celery/33047721#33047721)
+- [Scheduling task with CELERY_BEAT_SCHEDULE](https://www.caktusgroup.com/blog/2021/08/11/using-celery-scheduling-tasks/)
+- [Stored procedures in Django](https://dev.to/adii9/stored-procedures-and-django-a-match-made-in-performance-heaven-1fi9)
+- [Result Set from Stored Procedure ?](https://stackoverflow.com/questions/58507979/how-to-get-result-set-from-postgresql-stored-procedure)
+
+Today when I had a doubt regarding creation of tasks for sending emails using Celery and Celery Beat, my manager gave me this insightful input -
+
+_Send emails in batches with sleep in between so suppose we have lakhs of data then we can create a super task which would create batches of those emails and then call nested task of sending emails to each participant of that batch._
+
+So that's it for today, see you tomorrow. Bye!
