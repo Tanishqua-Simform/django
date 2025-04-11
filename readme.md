@@ -2239,3 +2239,15 @@ Today when I had a doubt regarding creation of tasks for sending emails using Ce
 _Send emails in batches with sleep in between so suppose we have lakhs of data then we can create a super task which would create batches of those emails and then call nested task of sending emails to each participant of that batch._
 
 So that's it for today, see you tomorrow. Bye!
+
+##### Dt. 11 Apr, 2025.
+
+Today, I will work on implementing Throttling, Middleware and Caching.
+
+I found these articles informative - [Dynamic QR Code](https://community.thunkable.com/t/how-to-create-a-dynamic-qr-code-which-changes-automatically-after-each-scan-or-after-an-interval/2608584) | [Sending Context to Serializers](https://micropyramid.medium.com/how-to-pass-extra-context-data-to-serializers-in-django-rest-framework-ba11749a34bb)
+
+I have implemented fake payment process in my application. I helped few trainees in solving bugs related to Celery and Generic API Views in their project.
+
+I will continue implementing throttling, caching and Middleware on Monday. Also, we had a little Puff Party today!
+
+So that's it for today. See you on Monday. Bye!
