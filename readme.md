@@ -2251,3 +2251,15 @@ I have implemented fake payment process in my application. I helped few trainees
 I will continue implementing throttling, caching and Middleware on Monday. Also, we had a little Puff Party today!
 
 So that's it for today. See you on Monday. Bye!
+
+##### Dt. 14 Apr, 2025.
+
+Today, I have worked on implementing Middleware for logging all the requests that the server has served each day.
+
+Along with that I have added custom throttling functionality over the Request Methods, so as to allow more GET requests where as comparatively lesser PUT and POST requests.
+
+I found these blogs helpful while development - [Django logging](https://last9.io/blog/django-logging/) | [Scope Throttling for FBVs](https://stackoverflow.com/questions/63454449/django-rest-framework-scope-throttling-on-function-based-view)
+
+I also attended a session on DRF, so did not get much time to complete caching. I will do that later now.
+
+So that's it for today. See you tomorrow. Bye!
