@@ -2263,3 +2263,26 @@ I found these blogs helpful while development - [Django logging](https://last9.i
 I also attended a session on DRF, so did not get much time to complete caching. I will do that later now.
 
 So that's it for today. See you tomorrow. Bye!
+
+##### Dt. 15 Apr, 2025.
+
+Today I have created Jinja template for sending menu through emails.
+
+Although, I faced many issues at first, as I created DTL using Bootstrap but later I got to know that certain mail Providers block external CSS files, due to which I had to create inline css later.
+
+So i have implemented both Jinja as well as DTL and I have created a custtom filter for Formatting Dish Names in DTL.
+
+I found these articles helpful -
+
+- [Django Template in Email](https://anymail.dev/en/v8.0/tips/django_templates/)
+- [StackOverFlow - Template Email](https://stackoverflow.com/questions/2809547/creating-email-templates-with-django)
+- [Jinja Environement Setup](https://samuh.medium.com/using-jinja2-with-django-1-8-onwards-9c58fe1204dc)
+- [Django DTL Custom Filter](https://realpython.com/django-template-custom-tags-filters/#:~:text=Custom%20tags%20and%20filters%20live,to%20load%20the%20tag%20library.)
+- [Jinja and DTL Configuration](https://docs.djangoproject.com/en/5.2/topics/templates/)
+- [Bootstrap in DTL](https://django-bootstrap-v5.readthedocs.io/en/latest/quickstart.html)
+- [Test cases in DRF Medium](https://medium.com/@katheller/testing-with-apitestcase-in-drf-useful-tips-example-c3182944be58)
+- [Test Database Creation Failed Error SOLVED!](https://stackoverflow.com/questions/14186055/django-test-app-error-got-an-error-creating-the-test-database-permission-deni)
+
+Later I created a test case for my custom User model but it was throwing some permission errors, so i will look in that tomorrow.
+
+So that's it for today. See you tomorrow. Bye!
