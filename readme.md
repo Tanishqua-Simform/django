@@ -2286,3 +2286,25 @@ I found these articles helpful -
 Later I created a test case for my custom User model but it was throwing some permission errors, so i will look in that tomorrow.
 
 So that's it for today. See you tomorrow. Bye!
+
+##### Dt. 16 Apr, 2025.
+
+Today, I have implemented Functions in Postgres to get Monthly as well as Daily Analysis. Then I created Scheduled tasks to send payment and setting availability reminder from mail, as well as menu from mail.
+
+Later I implemented Caching in Redis for Menu retrieval hourly as well as Monthly and Daily Analysis.
+
+I found these articles helpful -
+
+- [PostgreSQL Functions](https://stackoverflow.com/questions/15726421/how-to-return-a-table-rows-or-record-from-a-function-in-postgresql-9)
+- [Using Date in Postgres Function](https://stackoverflow.com/questions/37395100/how-do-i-use-a-date-as-a-variable-in-a-postgresql-function)
+- [Caching in DRF](https://www.django-rest-framework.org/api-guide/caching/)
+- [Caching in Django with Redis](https://medium.com/django-unleashed/caching-in-django-with-redis-a-step-by-step-guide-40e116cb4540)
+
+P.S - Found this quote in DRF Docs
+_Caching - A certain woman had a very sharp consciousness but almost no memory ... She remembered enough to work, and she worked hard. - Lydia Davis_
+
+And a Ranting Sesh -
+Can't use parameter with Name CURRENT_DATE in a function because it was a Keyword in Postgres. WOW! Dumb me.
+Couldn't solve it out for over 20 mins about why the hell code was not working :)
+
+So that's it for today. See you tomorrow. Bye!
