@@ -2308,3 +2308,16 @@ Can't use parameter with Name CURRENT_DATE in a function because it was a Keywor
 Couldn't solve it out for over 20 mins about why the hell code was not working :)
 
 So that's it for today. See you tomorrow. Bye!
+
+##### Dt. 17 Apr, 2025.
+
+Today, I have created testcases for Users and Consumer Apps. Along with that, I have changed the responses of API's to contain a uniform format.
+
+I found these articles helpful while developing testcases -
+
+- [Simfood_user can't create test database in Postgres](https://stackoverflow.com/questions/14186055/django-test-app-error-got-an-error-creating-the-test-database-permission-deni)
+- [Testcase for JWT Authentication](https://stackoverflow.com/questions/47576635/django-rest-framework-jwt-unit-test)
+
+P.S. - Yesterday, I helped one of the co-trainee with a bug they faced in Throttling as well as one other trainee with some issue in their URL Routing and Migrations.
+
+So that's it for today, see you tomorrow. Bye!
