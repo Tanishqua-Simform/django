@@ -2321,3 +2321,15 @@ I found these articles helpful while developing testcases -
 P.S. - Yesterday, I helped one of the co-trainee with a bug they faced in Throttling as well as one other trainee with some issue in their URL Routing and Migrations.
 
 So that's it for today, see you tomorrow. Bye!
+
+##### Dt. 18 Apr, 2025.
+
+Today, I have created testcases for views with 71% coverage and 87% coverage overall. Later I added Scanner functionality to mark attendance at canteen.
+
+Along with that, I created a signal to delete cache if menu is changed by chef.
+
+I found this article helpdul - [DRF TestCase Coverage](https://stackoverflow.com/questions/22726449/django-test-coverage-vs-code-coverage#:~:text=Now%20running%20'coverage%20run%20manage,lines%20that%20aren't%20covered.)
+
+With this I have completed all the functionalities for my Project. I will do some cleaning on monday.
+
+So that's it for today, see you on monday. Bye!
