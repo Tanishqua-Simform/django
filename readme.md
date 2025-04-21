@@ -2333,3 +2333,11 @@ I found this article helpdul - [DRF TestCase Coverage](https://stackoverflow.com
 With this I have completed all the functionalities for my Project. I will do some cleaning on monday.
 
 So that's it for today, see you on monday. Bye!
+
+##### Dt. 21 Apr, 2025.
+
+Today, I have formatted the code for my SimFood project. The link to my project is - [SimFood](https://github.com/Tanishqua-Simform/SimFood)
+
+I have my evaluation scheduled on day after tomorrow. So I will do revision for that tomorrow.
+
+So that's it for today, see you tomorrow. Bye!
