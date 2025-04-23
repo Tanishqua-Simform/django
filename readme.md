@@ -2347,3 +2347,13 @@ So that's it for today, see you tomorrow. Bye!
 Today, I have revisited django concepts for my evaluation tomorrow. I will study the rest of the topics at home.
 
 So that's it for today, wish me luck for tomorrow. See you! Bye.
+
+##### Dt. 23 Apr, 2025.
+
+Today, I have my evaluation so I will prepare for it.
+
+Okay, so I have prepared for my evaluation but later I got the news that it is shifted tomorrow.
+
+Later, I taught one of my co-trainee some of core and advance concepts in Python as I had some time in my hand, and it helped me in gaining deeper understanding of those topics as well.
+
+So that's it for today, I will have my evaluation tomorrow so wish me luck. Bye!
