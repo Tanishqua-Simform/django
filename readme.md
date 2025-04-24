@@ -2357,3 +2357,23 @@ Okay, so I have prepared for my evaluation but later I got the news that it is s
 Later, I taught one of my co-trainee some of core and advance concepts in Python as I had some time in my hand, and it helped me in gaining deeper understanding of those topics as well.
 
 So that's it for today, I will have my evaluation tomorrow so wish me luck. Bye!
+
+##### Dt. 24 Apr, 2025.
+
+Today, I had my 2nd evaluation and it went good. Overall, I was confident with my responses and I enjoyed tackling the questions one after the other.
+
+Other than that, I helped that trainee with python concepts as it helped me revise those concepts firmly as well.
+
+Later on, I sat with all the trainees for sometime to discuss each other's evaluation experience and learn from each other.
+
+## SimFood
+
+I have created SimFood application as a part of my evaluation for Django and DRF. It covered topics like Caching, Throttling, Celery Beat, Redis, Test Cases, Jinja, Scheduled Tasks and so on.
+
+It took me 13 Business days to complete this project from Brainstorming the idea, to designing the architecture, to actual development and lastly, testing the robustness of my Application.
+
+You can have a look at my Project here -> [SimFood](https://github.com/Tanishqua-Simform/SimFood)
+
+So that's it for this repo. Stay tuned for further courses.
+
+###### With this we come to an end for our Django + DRF Course (Learning duration - 17 days (Django) + 4 days (DRF) + 14 days (SimFood) + 3 days (2nd Evaluation prep))
